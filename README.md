@@ -2,6 +2,7 @@
 
 ## Flowlog
 
+* [Slides](./flowlog.pptx). **These slides are subject to change!**
 * [Machine-generated Alloy spec for a Flowlog program](./flowlog_nib.als). Concretely, this is a "Network Information Base": it maintains knowledge of reachability, etc. in the network. 
 
 The Flowlog spec is Alloy, not Forge, because Forge didn't exist then! Other materials will use Forge.
@@ -24,11 +25,15 @@ Then:
 
 A domain model of grid-worlds, where the cost of traveling between rooms isn't necessarily `1`. 
 
-* [Forge domain model of Gridworlds](gridworld.frg). 
-<!-- * [gridworld.test.frg](Partial Forge validation for Gridworlds). -->
-* [Cope-and-drag specification for visualizing Gridworlds](gridworld.cnd).
+(These will be provided on Tuesday.)
+
+<!-- * [Forge domain model of Gridworlds](gridworld.frg). 
+* [gridworld.test.frg](Partial Forge validation for Gridworlds).
+* [Cope-and-drag specification for visualizing Gridworlds](gridworld.cnd). -->
 
 ## A* Search Model 
+
+A model of the A* search algorithm.
 
 (These will be provided on Tuesday.)
 
