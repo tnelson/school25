@@ -1,0 +1,36 @@
+constraints:
+  - orientation:
+      selector: >-
+        {r1,r2: Room | (add[r2.xloc,0] > add[r1.xloc,0]) and (add[r2.yloc,0] =
+        add[r1.yloc,0])}
+      directions:
+        - directlyLeft
+  - orientation:
+      selector: >-
+        {r1,r2: Room | (add[r2.yloc,0] > add[r1.yloc,0]) and (add[r2.xloc,0] =
+        add[r1.xloc,0])}
+      directions:
+        - directlyAbove
+  - orientation:
+      selector: '{r1,r2: Room | (add[r2.yloc,0] > add[r1.yloc,0])}'
+      directions:
+        - above
+  - orientation:
+      selector: '{r1,r2: Room | (add[r1.xloc, 0] < add[r2.xloc,0])}'
+      directions:
+        - left  
+directives:
+  - size:
+      selector: Room
+      width: 100
+      height: 120
+  - attribute:
+      field: doors
+  - inferredEdge:
+      selector: '{r1: Room, i: Int, r2: Room | r1->r2->i in doors}'
+      name: moves
+  - flag: hideDisconnectedBuiltIns
+  - attribute:
+      field: yloc
+  - attribute:
+      field: xloc
