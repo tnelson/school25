@@ -24,9 +24,9 @@ Then:
 
 A domain model of grid-worlds, where the cost of traveling between rooms isn't necessarily `1`. 
 
-* [gridworld.frg](Forge domain model of Gridworlds). 
+* [Forge domain model of Gridworlds](gridworld.frg). 
 <!-- * [gridworld.test.frg](Partial Forge validation for Gridworlds). -->
-* [gridworld.cnd](Cope-and-drag specification for visualizing Gridworlds).
+* [Cope-and-drag specification for visualizing Gridworlds](gridworld.cnd).
 
 ## A* Search Model 
 
