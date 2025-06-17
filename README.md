@@ -48,3 +48,27 @@ A model of the A* search algorithm.
 * [Cope-and-drag specification for visualizing A* runs](./astar.cnd).
 
 <!-- * [astar.js](Forge custom visualization for A* runs). -->
+
+## Thoughts on Hackathon Topics 
+
+I'll try to scope these to the 2-day hackathon, not a full research project. 
+
+### "Which instance?" in Alloy/Forge
+
+Honestly, Eunsuk's list was great for those interested in modifying or doing empirical studies with Alloy. If you're interested in the "which instance should be shown next?" problem, [I've done some work there](https://cs.brown.edu/~tbn/publications/nsdfk-icse13-aluminum.pdf) with collaborators at Brown. But so have a few others. In particular, I'm a big fan of [this work](https://link.springer.com/chapter/10.1007/978-3-642-54804-8_2) by Alcino Cunha and others, which is built into the Pardinus/Kodkod engine that both Forge and Alloy use. 
+
+If you want to experiment with different instance-iterator priorities, I suggest working with Pardinus directly, _not_ Alloy, which doesn't give the full interface that Pardinus does. Forge gives a bit more (e.g., exposing maximization and minimization!) but it's still a very limited set of features compared to the full target-oriented engine.
+
+I'm curious whether Hamming-distance metrics are always good. Don't they give a lot of weight to higher-arity predicates? What other metrics could we imagine?
+
+### Visualization in Alloy/Forge 
+
+We've seen a few improvements on Alloy's default visualizer. Forge uses both Sterling and CnD. Penlloy uses Penrose. There are some other academic works that explore the question, which you can find links to in our [paper forthcoming at ECOOP](https://www.siddharthaprasad.com/unpublished/pgnk-lightweight-diagramming.pdf). 
+
+I'm personally interested in what it would take to integrate Alloy and CnD. The latest version of Alloy has a command-line interface; if there's a way to print the instance XML there then we could perhaps imagine piping that data to CnD. 
+
+## What would you like to model? 
+
+Do you have a research domain you'd like to model? This is a good time to get advice and perhaps build a prototype. Some of us have been writing specifications for a long time, and so we may be able to help you avoid various pitfalls. 
+
+
