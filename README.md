@@ -26,6 +26,13 @@ Then:
 * `cd` into the repository (`cd Forge`).
 * Install the Racket package (`raco pkg install ./forge `). (Make sure you include the prefix `./` or Racket will refer to the package server, not your newly cloned repo.)
 
+For our context today, I suggest running via the command line, not the VSCode extension. You just run `racket <filename.frg>`. If you want to use [CnD](https://www.siddharthaprasad.com/copeanddrag/), you'll need to install it separately:
+
+```
+npm install cope-and-drag -g
+npx cope-and-drag
+```
+
 ## Gridworld Model
 
 A domain model of grid-worlds, where the cost of traveling between rooms isn't necessarily `1`. 
