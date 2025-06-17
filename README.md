@@ -74,7 +74,7 @@ We've seen a few improvements on Alloy's default visualizer. Forge uses both Ste
 
 I'm personally interested in what it would take to integrate Alloy and CnD. The latest version of Alloy has a command-line interface; if there's a way to print the instance XML there then we could perhaps imagine piping that data to CnD. 
 
-## What would you like to model? 
+### What would you like to model? 
 
 Do you have a research domain you'd like to model? This is a good time to get advice and perhaps build a prototype. Some of us have been writing specifications for a long time, and so we may be able to help you avoid various pitfalls. 
 
