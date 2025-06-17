@@ -2,11 +2,15 @@
 
 ## Flowlog
 
-* [Slides](./flowlog.pptx). **These slides are subject to change!**
+* [Slides](./flowlog.pptx). (As of June 16; I may clean up some of them afterward.)
 * [Flowlog Network Information Base (NIB) program](./NIB.flg). This program maintains knowledge of reachability, etc. in the network. 
 * [Machine-generated Alloy spec for the NIB program](./flowlog_nib.als). 
 
 The Flowlog spec is Alloy, not Forge, because Forge didn't exist then! Other materials will use Forge.
+
+## Validation Slides 
+
+These are adapted from [the module I co-taught with Pamela Zave in 2023](https://fm.csl.sri.com/SSFT23/). These slides were from Pamela's part of the module. I'm using them with permission.
 
 ## Forge installation
 
