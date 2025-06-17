@@ -40,9 +40,47 @@ sig Room {
   yloc: one Int
 }
 
+/** Taxicab or Manhattan distance. */
+fun distance[r1, r2: Room]: one Int {
+  add[abs[subtract[r1.xloc, r2.xloc]], abs[subtract[r1.yloc, r2.yloc]]]
+}
+
 ---------------------------------------------------------------------
 -- Domain Predicates
 ---------------------------------------------------------------------
+
+/** Really, the inverse of allEdgesGTZero. */
+pred someNegativeCostEdge {
+  some i: Room.doors[Room] | i < 0
+}
+
+/** The gridworld is connected; there are no isolated rooms. */
+pred allConnected {
+  all r: Room | {
+    // Don't include r1 itself, since it may be the only room.
+    (Room-r) in r.^(doors.Int)
+  }
+}
+
+/** The grid contains no cyclic path. Keep in mind that we are modeling undirected 
+    edges using symmetric edges. So we can't just naively use transitive closure. */
+pred noUndirectedCycle {
+  // For every adjacent pair of rooms...
+  all disj r1: Room, r2: r1.doors.Int | {
+    // If we remove this (symmetric) edge, the pair becomes disconnected.
+    r2 not in r1.^(doors.Int - (r1->r2 + r2->r1))
+  }
+}
+
+/** Are these rooms horizonal or vertical neighbors? 
+     (The name `nsew` is for north-south-east-west.) */
+pred nsewNeighbor[r1, r2: Room] {
+  // Don't use e.g., `abs[subtract[r1.yloc, r2.yloc]] = 1` here. This is simpler.
+  // `next` is reserved in Forge, thus `succ`essor intead. 
+  (r1.xloc = r2.xloc and (r1.yloc = r2.yloc.succ or r2.yloc = r1.yloc.succ))
+    or
+  (r1.yloc = r2.yloc and (r1.xloc = r2.xloc.succ or r2.xloc = r1.xloc.succ))
+}
 
 /** Undirected graph, modeled as a symmetric edge set with no self loops */
 pred undirectedGraph {

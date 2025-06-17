@@ -1,0 +1,58 @@
+constraints:
+  - orientation:
+      selector: '{r1,r2: Room | (r2.xloc > r1.xloc) and (r2.yloc = r1.yloc)}'
+      directions:
+        - directlyLeft
+  - orientation:
+      selector: '{r1,r2: Room | (r2.yloc > r1.yloc) and (r2.xloc = r1.xloc)}'
+      directions:
+        - directlyAbove
+  - orientation:
+      selector: '{r1,r2: Room | (r2.yloc > r1.yloc)}'
+      directions:
+        - above
+  - orientation:
+      selector: '{r1,r2: Room | (r1.xloc < r2.xloc)}'
+      directions:
+        - left
+directives:
+  - attribute:
+      field: kind
+  - icon:
+      selector: AStar.start - AStar.goal
+      path: /img/goat.png
+      showLabels: true
+  - icon:
+      selector: AStar.goal - AStar.start
+      path: /img/apple.png
+      showLabels: true
+  - icon:
+      selector: AStar.goal & AStar.start
+      path: /img/mouth.png
+      showLabels: true   
+  - hideField:
+      field: doors
+  - color:
+      selector: AStar.finalized
+      value: '#669c35'
+  - color:
+      selector: AStar.frontier
+      value: '#00a3d7'
+  - size:
+      selector: Room
+      width: 100
+      height: 90
+  - inferredEdge:
+      selector: '{r1: Room, i: Int, r2: Room | r1->r2->i in doors}'
+      name: moves
+  - flag: hideDisconnectedBuiltIns
+  - attribute:
+      field: yloc
+  - attribute:
+      field: xloc
+  - projection:
+      sig: AStar
+  - attribute:
+      field: realCost
+  - attribute:
+      field: estimatedCost
