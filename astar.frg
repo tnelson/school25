@@ -179,3 +179,7 @@ astar_on_gridworld_6rooms_nontrivial: run {
     not noUndirectedCycle // I want to see examples that aren't linear.
 } for exactly 6 Room
 
+/** Extract the set of edges used in the shortest-path tree from start to goal. */
+fun usedEdges: set Room -> Room {
+    {r1, r2: Room | r1->r2 in AStar.tree and 
+                    AStar.start not in AStar.goal.^(AStar.tree - r1->r2)}}

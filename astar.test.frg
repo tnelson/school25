@@ -258,10 +258,8 @@ REQ_path_cost_agrees: assert {
      AStar.goal in AStar.start.^(doors.Int) 
     } implies 
       eventually {
-        // Use the fact that `tree` is in fact a tree. Follow the edges from goal to start.
-        let usedEdges = {r1: Room, r2: Room | 
-          r1->r2 in AStar.tree and AStar.start not in AStar.goal.^(AStar.tree - r1->r2)} | 
-            (sum r: usedEdges.Room | (r.doors)[r.(AStar.tree)]) = AStar.realCost[AStar.goal]
+        // Use the fact that `tree` is in fact a tree. Follow the edges from goal to start. 
+        (sum r: usedEdges.Room | (r.doors)[r.(AStar.tree)]) = AStar.realCost[AStar.goal]
     }
 } is necessary for astarTrace for optimizer_6rooms
 
