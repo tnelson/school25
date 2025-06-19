@@ -86,3 +86,5 @@ Concretely, we built a new operator that repeats the `next_state` operator a giv
 
 * [Racket file with `nexts` defined](./nexts.rkt)
 * [Forge model using the new operator](./extension_demo.frg)
+
+Note that `forge/core` is essentially Racket with some added Forge-specific modules. This means that apparently-benign extensions could be a security risk, since you are running arbitrary Racket code. 
