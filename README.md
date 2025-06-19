@@ -78,4 +78,11 @@ I'm personally interested in what it would take to integrate Alloy and CnD. The 
 
 Do you have a research domain you'd like to model? This is a good time to get advice and perhaps build a prototype. Some of us have been writing specifications for a long time, and so we may be able to help you avoid various pitfalls. 
 
+## Extending Forge 
 
+Skyler and I sat down on Thursday and built a demo of how you can extend Forge, if you know Racket. 
+
+Concretely, we built a new operator that repeats the `next_state` operator a given number of times.
+
+* [Racket file with `nexts` defined](./nexts.rkt)
+* [Forge model using the new operator](./extension_demo.frg)
