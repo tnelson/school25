@@ -74,7 +74,7 @@ pred cheaper_wellformed_fixed {
     AStar.start.*cheapEdges = (cheapEdges[Room] + cheapEdges.Room)
     // No double-successors
     all r: cheapEdges.Room | lone r.cheapEdges
-    // No cycles in candidate (not even symmetric edges), since it's an alternate path.
+    // No cycles in candidate (not even symmetric edges), since it's an alternate path
 } 
 
 /** Predicate describing that the cost-so-far totals for nodes are well-formed. */
@@ -134,6 +134,7 @@ REQ_optimal_CE: assert {
 /** Regression test: wellformed predicate should allow paths of length > 1*/
 wellformed_non_immediate: assert {
     cheaper_wellformed_fixed
+    wellformed_ofTotals
     // Actual reachability in >1 step
     AStar.goal not in AStar.start.(doors.Int) 
     AStar.goal in AStar.start.^(doors.Int)

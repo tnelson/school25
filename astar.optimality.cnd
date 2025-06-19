@@ -17,7 +17,7 @@ constraints:
         - left
 directives:
   - inferredEdge:
-      selector: '{r1: Room, i: Int, r2: Room | r1->r2->i in doors}'
+      selector: '{r1: Room, i: Int, r2: Room | r1->r2->i in Helper.cheaper}'
       name: CAND
   - hideField:
       field: cheaper
