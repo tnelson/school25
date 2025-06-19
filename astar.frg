@@ -113,7 +113,10 @@ pred step {
 
             // For each, can we do better than the current guess via expandAt? 
             all neighbor: neighbors | { 
+                // "good" version
                 let new_cost = add[AStar.realCost[expandAt], expandAt.doors[neighbor]] | {
+                // "buggy" version
+                //let new_cost = add[AStar.estimatedCost[expandAt], expandAt.doors[neighbor]] | {
                     
                     ((no AStar.realCost[neighbor] or AStar.realCost[neighbor] > new_cost) => {
                          AStar.realCost'[neighbor] = new_cost and

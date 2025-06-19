@@ -18,12 +18,14 @@ option run_sterling "astar.optimality.cnd"
   Since overflow protection introduces new problems for the transition system, we'll 
   have to deal with this manually. I chose to accumulate length-so-far for every node 
   in both paths, and detect if for some hop n1 -> n2, the increase in length-so-far <0.
+
+  Note on expanding this:
+
+  We could use the same technique to check optimality for the entire shortest-path
+  /tree/, because a counterexample is still a single path from the start to some room. 
 */
 
 option max_tracelength 8
-
-/*
- */
 
 one sig Helper {
     /** The candidate alternative path to be found */

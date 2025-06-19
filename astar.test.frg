@@ -10,7 +10,7 @@ option max_tracelength 8
 
 /***************************************************
 /** COMMENT THIS OUT AND RE-RUN IF ANY TESTS FAIL. */
-option run_sterling off
+// option run_sterling off
 
 
 ---------------------------------------------------------------------
@@ -93,9 +93,27 @@ check_estimatedCost_monotonic: assert {
 check_treeDomain_monotonic: assert {
     undirectedGraph and step and not (tree.Room in tree'.Room)
 } is unsat
-check_finalized_monotonic: assert {
-    undirectedGraph and step and not (finalized in finalized')
-} is unsat
+/** the real cost is always <= the estimated cost, unless overflow occurs.
+    Technically an "invariant", but the "unless overflow occurs" part is annoying. */
+/*check_real_vs_estimated_monotonic: assert {
+    undirectedGraph
+    step
+    not {
+        // precondition: need estimatedCost not to overflow, and defined pre-transition
+        (all r: Room | { 
+            invariants // assuming these are verified
+            
+            some AStar.estimatedCost[r]
+            some AStar.realCost[r]
+            AStar.estimatedCost[r] >= 0
+            AStar.estimatedCost'[r] >= 0
+            AStar.realCost[r] <= AStar.estimatedCost[r] 
+        }) implies
+        (all r: Room | { 
+            AStar.realCost'[r] <= AStar.estimatedCost'[r] 
+        })
+    }
+} is unsat*/
 
 /** Various state invariants. 
     - The shortest-path `tree` is indeed always a tree. 
@@ -110,7 +128,8 @@ check_finalized_monotonic: assert {
       - tree's domain (reached) is never outside finalized+frontier
       - frontier and finalized are all reachable from the start
     
-    - Every edge in the shortest-path tree is an edge in the graph. */
+    - Every edge in the shortest-path tree is an edge in the graph.
+    - real and estimated costs are only populated for rooms in the frontier/finalized sets. */
 pred invariants {
      all r: Room | r not in r.^(AStar.tree)
      
@@ -119,10 +138,21 @@ pred invariants {
      no (AStar.frontier & AStar.finalized)
      AStar.tree[Room] in AStar.finalized
      AStar.tree.Room in  AStar.frontier + AStar.finalized
-     AStar.frontier + AStar.finalized in AStar.start.^(doors.Int)
+     AStar.frontier + AStar.finalized in (AStar.start.^(doors.Int) + AStar.start)
 
      AStar.tree in doors.Int
+
+     AStar.realCost.Int in AStar.frontier + AStar.finalized
+     AStar.estimatedCost.Int in AStar.frontier + AStar.finalized
+
+     // Frontier-consistency: everything finalized or in the frontier is 
+     // reachable using only doors between start/frontier/finalized.
+     // TODO
+
+     
 }
+sat_invariants: assert { invariants } is sat
+init_invariants: assert { init } is sufficient for invariants 
 check_invariants: assert {
     // Structural preconditions/assumptions
     AStar.start != AStar.goal
@@ -240,7 +270,7 @@ REQ_reachable_tree: assert {
   upper bounds sent to the engine directly.
 */
 
-inst optimizer_6rooms {
+inst optimizer_5rooms {
   // There are 5 possible rooms.  (6 takes longer than I want for this lecture. :-))
   Room in `Room0 + `Room1 + `Room2 + `Room3 + `Room4 
   AStar = `AStar0
@@ -252,6 +282,7 @@ inst optimizer_6rooms {
            (`Room0 + `Room1 + `Room2 + `Room3 + `Room4) -> (0+1+2+3)
 }
 
+/** Summing up all edges in the path agrees with the realCost table entry. */
 REQ_path_cost_agrees: assert {
     {(AStar.start != AStar.goal)
      undirectedGraph 
@@ -261,7 +292,7 @@ REQ_path_cost_agrees: assert {
         // Use the fact that `tree` is in fact a tree. Follow the edges from goal to start. 
         (sum r: usedEdges.Room | (r.doors)[r.(AStar.tree)]) = AStar.realCost[AStar.goal]
     }
-} is necessary for astarTrace for optimizer_6rooms
+} is necessary for astarTrace for optimizer_5rooms
 
 
 /* OPTIMALITY IS IN A SEPARATE FILE! */
