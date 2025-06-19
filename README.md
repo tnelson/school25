@@ -80,7 +80,7 @@ Do you have a research domain you'd like to model? This is a good time to get ad
 
 ## Extending Forge 
 
-Skyler and I sat down on Thursday and built a demo of how you can extend Forge, if you know Racket. 
+Skyler and I sat down on Thursday and built a demo of how you can extend Forge, if you know Racket. This functionality isn't documented, and is subject to change. But it can still be very useful.
 
 Concretely, we built a new operator that repeats the `next_state` operator a given number of times.
 
